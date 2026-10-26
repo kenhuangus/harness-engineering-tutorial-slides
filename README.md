@@ -52,9 +52,10 @@ python -m unittest discover -s tests
 
 1. **Slide 1: Hero** — Course overview, book references, and direct links.
 2. **Slide 2: About the Instructor** — Ken Huang, CISSP bio, credentials, 10 academic and industry books, and major publishers.
-3. **Slide 3: Course Agenda** — 10-chapter map across Foundations & Control, Reliability, State, and Fleet Scale.
-4. **Slide 4: Universal Environment Setup** — Interactive command steps with one-click copy buttons and OS instructions.
-5. **Slides 5–14: The 10 Hands-On Chapter Labs**:
+3. **Slide 3: Core Thesis** — Probabilistic model vs. deterministic control plane, why prompts fail, and the 5-stage long-horizon agent lifecycle.
+4. **Slide 4: Course Agenda** — 10-chapter map across Foundations & Control, Reliability, State, and Fleet Scale, plus the 5-step teaching protocol.
+5. **Slide 5: Universal Environment Setup** — Interactive command steps with one-click copy buttons and OS instructions.
+6. **Slides 6–15: The 10 Hands-On Chapter Labs** (with failure injection challenges):
    - **Ch 01: Control Plane** — Unsafe shared-tool swarm vs. secure harness control plane.
    - **Ch 02: Autonomy** — Graduated autonomy ladder, capability budgets, lease renewal, and rollback hooks.
    - **Ch 03: Identity** — Per-agent identity, task-scoped audience binding, delegation chains, and key rotation.
@@ -65,4 +66,5 @@ python -m unittest discover -s tests
    - **Ch 08: Runtime Steering** — Dynamic intervention, temporary policy overlays with TTL, and safe rollback.
    - **Ch 09: Scalability** — Fleet bulkheads, token-bucket back-pressure, and idempotency ledgers.
    - **Ch 10: Data Governance** — Classification-aware routing, residency enforcement, and verifiable dual-layer erasure.
-6. **Slide 15: Course Finish Line** — Summary of the teaching cycle, tabletop-to-code mapping, and resource links.
+7. **Slide 16: Enterprise Architecture Mapping** — Translation table from HarnessLab standard library primitives to production infrastructure (SPIFFE, OPA, AWS Bedrock Guardrails, PostgreSQL RLS, Temporal, OpenTelemetry).
+8. **Slide 17: Capstone Fleet Project & Certification Gates** — Autonomous 3-agent remediation fleet specification, 5 production readiness gates, and suite execution commands.

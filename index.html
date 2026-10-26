@@ -108,7 +108,7 @@
     <div class="bar__actions">
       <select id="slideSelect" class="slide-select" aria-label="Select Slide"></select>
       <div class="goto-group" title="Jump to slide number (or press 'g')">
-        <input type="number" id="gotoInput" min="1" max="16" placeholder="#" class="goto-input" aria-label="Go to slide number">
+        <input type="number" id="gotoInput" min="1" max="17" placeholder="#" class="goto-input" aria-label="Go to slide number">
         <button type="button" class="btn-goto" id="gotoBtn">Go ➔</button>
       </div>
       <button type="button" class="bar__btn" id="fsBtn" aria-label="Toggle Fullscreen (F)" title="Toggle Fullscreen (F)">
@@ -892,11 +892,86 @@
       </div>
     </section>
 
-    <!-- SLIDE 16: CLOSE & WORKSHOP GUIDE -->
-    <section class="slide" id="s16" data-slide="16" data-title="Tutorial Class Summary &amp; Workshop Guide">
+    <!-- SLIDE 16: ENTERPRISE ARCHITECTURE MAPPING -->
+    <section class="slide" id="s16" data-slide="16" data-title="Enterprise Architecture: Tabletop to Production">
+      <div class="slide__in">
+        <span class="kicker">Production Translation</span>
+        <h2 class="h2">Enterprise Architecture Mapping (Tabletop to Production)</h2>
+        <p class="lead">Mapping HarnessLab dependency-free standard library primitives to production cloud and enterprise security controls.</p>
+        <div class="mapping-table-wrap">
+          <table class="mapping-table">
+            <thead>
+              <tr>
+                <th>HarnessLab Primitive</th>
+                <th>Control Plane Function</th>
+                <th>Enterprise Production Analogues</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>CredentialBroker</code></td>
+                <td>Audience-bound tokens &amp; delegation chains</td>
+                <td>SPIFFE/SPIRE workload identities, OAuth2 audience tokens, AWS IAM Roles Anywhere, HashiCorp Vault tokens</td>
+              </tr>
+              <tr>
+                <td><code>CapabilityBudget</code></td>
+                <td>Graduated autonomy ceilings &amp; token limits</td>
+                <td>API Gateway rate limiters, Envoy token buckets, AWS Bedrock service quotas, FinOps spend alert policies</td>
+              </tr>
+              <tr>
+                <td><code>IntentContract</code></td>
+                <td>Purpose authorization &amp; call rewriting</td>
+                <td>Open Policy Agent (OPA/Rego), Cedar authorization rules, Langfuse prompt version contracts, API sanitizers</td>
+              </tr>
+              <tr>
+                <td><code>ContextFirewall</code></td>
+                <td>Trust tiers, injection quarantine &amp; lethal trifecta</td>
+                <td>NeMo Guardrails, AWS Bedrock Guardrails, Azure AI Content Safety, Llama Guard, Lakera Gandalf filters</td>
+              </tr>
+              <tr>
+                <td><code>MemoryFirewall</code></td>
+                <td>Write-gates, tenant partitions &amp; tombstones</td>
+                <td>PostgreSQL Row-Level Security (RLS), Redis TTL + immutable tombstone audit tables, Mem0 / Zep tenant partitions</td>
+              </tr>
+              <tr>
+                <td><code>Tracer</code> &amp; <code>EvidenceEnvelope</code></td>
+                <td>Span redaction, SHA-256 evidence &amp; replay</td>
+                <td>OpenTelemetry (OTel) collectors, Jaeger trace streams, Sigstore artifact signing, Langfuse/Arize evaluation suites</td>
+              </tr>
+              <tr>
+                <td><code>RuntimeController</code></td>
+                <td>Intervention actions, temporary overlays &amp; rollback</td>
+                <td>Temporal.io workflow signals, AWS Step Functions compensation sagas, Kubernetes pod lifecycle hooks</td>
+              </tr>
+              <tr>
+                <td><code>FleetCoordinator</code></td>
+                <td>Tenant bulkheads, back-pressure &amp; idempotency</td>
+                <td>RabbitMQ/Kafka partitioned queues, Redis distributed locks, Celery task de-duplication, Envoy circuit breakers</td>
+              </tr>
+              <tr>
+                <td><code>DataGovernanceEngine</code></td>
+                <td>Classification routing, residency &amp; dual erasure</td>
+                <td>Microsoft Purview, Immuta, Privacera, Presidio DLP proxies, AWS Macie, HashiCorp boundary egress policies</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="chip-row" style="margin-top:0.40rem;">
+          <span class="chip">#EnterpriseHarness</span>
+          <span class="chip">#SPIFFE</span>
+          <span class="chip">#OPA</span>
+          <span class="chip">#OpenTelemetry</span>
+          <span class="chip">#Temporal</span>
+          <span class="chip">#DataGovernance</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 17: CLOSE, CAPSTONE & WORKSHOP GUIDE -->
+    <section class="slide slide--alt" id="s17" data-slide="17" data-title="Tutorial Class Summary &amp; Capstone Project">
       <div class="slide__in">
         <span class="kicker">Class Summary</span>
-        <h2 class="h2">Run All Labs and Teach the Evidence</h2>
+        <h2 class="h2">Run All Labs and Build the Capstone</h2>
         <p class="lead">The measure of an agent system is not whether it generates code fast, but whether its harness can govern, trace, interrupt, and reverse its actions.</p>
         <div class="lab-grid">
           <div class="card card--focus">
@@ -911,12 +986,13 @@
             </div>
             <ul class="clean-list">
               <li>• <strong>The Teaching Loop:</strong> 1. Run scenario ➔ 2. Inspect <code>result.json</code> ➔ 3. Inject one failure ➔ 4. Verify harness boundary.</li>
-              <li>• <strong>Tabletop-to-Code:</strong> Map every lab decision to your enterprise model gateway, tool broker, workflow engine, or memory store.</li>
+              <li>• <strong>Student Workbook:</strong> Follow <code>WORKBOOK.md</code> in the repository for guided worksheets across all 10 chapters.</li>
             </ul>
           </div>
           <div class="card card--defense">
-            <h3 class="card__title"><span class="tag tag--green">Official Resources</span><span>Book &amp; Code Links</span></h3>
+            <h3 class="card__title"><span class="tag tag--green">Capstone &amp; Resources</span><span>Certification Gates</span></h3>
             <ul class="clean-list">
+              <li>• <strong>Capstone Fleet:</strong> Design a 3-agent fleet (Triage, Patch, Deploy) satisfying all 5 production readiness gates.</li>
               <li>• <strong>Lab Repository:</strong> <a href="https://github.com/kenhuangus/HarnessLab" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">github.com/kenhuangus/HarnessLab ↗</a></li>
               <li>• <strong>Published Book:</strong> <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">Harness Engineering (Amazon Kindle) ↗</a></li>
               <li>• <strong>Author Site:</strong> <a href="https://distributedapps.ai/" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">distributedapps.ai ↗</a></li>
@@ -924,8 +1000,8 @@
             <div class="chip-row">
               <span class="chip">#HarnessEngineering</span>
               <span class="chip">#MultiAgentAI</span>
-              <span class="chip">#AISafety</span>
-              <span class="chip">#ProductionGrade</span>
+              <span class="chip">#CapstoneFleet</span>
+              <span class="chip">#ProductionReadiness</span>
             </div>
           </div>
         </div>
