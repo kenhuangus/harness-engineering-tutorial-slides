@@ -971,31 +971,32 @@
     <section class="slide slide--alt" id="s17" data-slide="17" data-title="Tutorial Class Summary &amp; Capstone Project">
       <div class="slide__in">
         <span class="kicker">Class Summary</span>
-        <h2 class="h2">Run All Labs and Build the Capstone</h2>
+        <h2 class="h2">Run All Labs, Certify Invariants &amp; Build the Capstone</h2>
         <p class="lead">The measure of an agent system is not whether it generates code fast, but whether its harness can govern, trace, interrupt, and reverse its actions.</p>
         <div class="lab-grid">
           <div class="card card--focus">
-            <h3 class="card__title"><span class="tag tag--orange">Class Verification</span><span>Run the Full Suite</span></h3>
+            <h3 class="card__title"><span class="tag tag--orange">Automated Student Certification</span><span>One-Click Readiness Audit</span></h3>
             <div class="lab-cmd-row">
-              <code class="lab-cmd-code">python -m harnesslab.cli run all</code>
-              <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m harnesslab.cli run all')">📋 Copy</button>
+              <code class="lab-cmd-code">python -m harnesslab.cli verify</code>
+              <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m harnesslab.cli verify')">📋 Copy</button>
             </div>
             <div class="lab-cmd-row">
-              <code class="lab-cmd-code">python -m unittest discover -s tests</code>
-              <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m unittest discover -s tests')">📋 Copy</button>
+              <code class="lab-cmd-code">python -m harnesslab.cli capstone</code>
+              <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m harnesslab.cli capstone')">📋 Copy</button>
             </div>
             <ul class="clean-list">
-              <li>• <strong>The Teaching Loop:</strong> 1. Run scenario ➔ 2. Inspect <code>result.json</code> ➔ 3. Inject one failure ➔ 4. Verify harness boundary.</li>
-              <li>• <strong>Student Workbook:</strong> Follow <code>WORKBOOK.md</code> in the repository for guided worksheets across all 10 chapters.</li>
+              <li>• <strong>Readiness Verification:</strong> <code>harnesslab verify</code> executes all 10 chapter labs, 5 invariant checks, and issues a tamper-evident SHA-256 certificate.</li>
+              <li>• <strong>Teaching Protocol:</strong> 1. Run scenario ➔ 2. Inspect <code>result.json</code> ➔ 3. Inject one failure ➔ 4. Verify harness boundary ➔ 5. Map to enterprise.</li>
             </ul>
           </div>
           <div class="card card--defense">
-            <h3 class="card__title"><span class="tag tag--green">Capstone &amp; Resources</span><span>Certification Gates</span></h3>
+            <h3 class="card__title"><span class="tag tag--green">Curriculum Hub &amp; Capstone</span><span>Student Resources</span></h3>
             <ul class="clean-list">
-              <li>• <strong>Capstone Fleet:</strong> Design a 3-agent fleet (Triage, Patch, Deploy) satisfying all 5 production readiness gates.</li>
-              <li>• <strong>Lab Repository:</strong> <a href="https://github.com/kenhuangus/HarnessLab" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">github.com/kenhuangus/HarnessLab ↗</a></li>
-              <li>• <strong>Published Book:</strong> <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">Harness Engineering (Amazon Kindle) ↗</a></li>
-              <li>• <strong>Author Site:</strong> <a href="https://distributedapps.ai/" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">distributedapps.ai ↗</a></li>
+              <li>• <strong>Student Workbook:</strong> <a href="https://github.com/kenhuangus/HarnessLab/blob/main/WORKBOOK.md" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">WORKBOOK.md ↗</a> (10 lab worksheets + injection challenges)</li>
+              <li>• <strong>Master Syllabus:</strong> <a href="https://github.com/kenhuangus/HarnessLab/blob/main/SYLLABUS.md" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">SYLLABUS.md ↗</a> (Executive, Bootcamp, University seminar tracks)</li>
+              <li>• <strong>Quick Reference:</strong> <a href="https://github.com/kenhuangus/HarnessLab/blob/main/QUICK_REFERENCE.md" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">QUICK_REFERENCE.md ↗</a> (Decision mechanics &amp; steering cheat sheet)</li>
+              <li>• <strong>Architecture Decision Records:</strong> <a href="https://github.com/kenhuangus/HarnessLab/tree/main/adr" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">adr/ ↗</a> (Enterprise ADR templates &amp; examples)</li>
+              <li>• <strong>Capstone Fleet:</strong> <a href="https://github.com/kenhuangus/HarnessLab/tree/main/capstone" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">capstone/ ↗</a> (3-agent autonomous remediation fleet)</li>
             </ul>
             <div class="chip-row">
               <span class="chip">#HarnessEngineering</span>
@@ -1013,7 +1014,7 @@
   <nav class="ctrl" aria-label="Slide Controls">
     <button type="button" class="ctrl__btn" id="prevBtn" aria-label="Previous Slide">‹ Prev</button>
     <div class="dots" id="dots" role="tablist"></div>
-    <span class="ctrl__count" id="count">1 / 16</span>
+    <span class="ctrl__count" id="count">1 / 17</span>
     <button type="button" class="ctrl__btn ctrl__btn--accent" id="nextBtn" aria-label="Next Slide">Next ›</button>
   </nav>
 
