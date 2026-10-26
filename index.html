@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hands-On Harness Engineering · 10-Chapter Tutorial Class</title>
+  <meta name="description" content="Hands-on tutorial for Harness Engineering: Design Patterns for Securing Long-Horizon Multi-Agent AI Systems. Ten chapter labs with Ken Huang, CISSP.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Kalam:wght@400;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css?v=20261026a">
+  <style>
+    .lab-cmd {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.78rem;
+      background: #141413;
+      color: #F5F0E8;
+      border-radius: 10px;
+      padding: 0.7rem 0.9rem;
+      line-height: 1.45;
+      overflow: auto;
+      white-space: pre-wrap;
+    }
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.1rem;
+      min-height: 0;
+      flex: 1;
+    }
+    .lab-grid .card { min-height: 0; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.55rem; }
+    .chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      border: 1.5px solid #D97757;
+      color: #BD5D3A;
+      background: #F5E6DF;
+      border-radius: 999px;
+      padding: 0.18rem 0.55rem;
+    }
+    .agenda-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.55rem;
+      margin-top: 0.6rem;
+    }
+    .agenda-item {
+      background: #FAF9F5;
+      border: 1.5px solid #E5E2D9;
+      border-radius: 12px;
+      padding: 0.55rem 0.6rem;
+      min-height: 4.6rem;
+    }
+    .agenda-item b {
+      display: block;
+      color: #BD5D3A;
+      font-size: 0.72rem;
+      margin-bottom: 0.2rem;
+    }
+    .agenda-item span {
+      font-size: 0.78rem;
+      font-weight: 650;
+      line-height: 1.25;
+      color: #141413;
+    }
+    @media (max-width: 1100px) {
+      .lab-grid, .agenda-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="bar">
+    <div class="bar__brand">
+      <span class="bar__logo">🧪</span>
+      <span>HARNESS LAB</span>
+    </div>
+    <div class="bar__title" id="slideTitle">Hands-On Harness Engineering</div>
+    <div class="bar__actions">
+      <button type="button" class="bar__btn" id="fsBtn" aria-label="Toggle Fullscreen (F)" title="Toggle Fullscreen (F)">
+        <span class="bar__btn-label">Full Screen</span>
+      </button>
+      <a href="https://github.com/PacktPublishing/Harness-Engineering-Design-Patterns" target="_blank" rel="noopener" class="bar__cta bar__cta--alt">Lab Repo ↗</a>
+      <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener" class="bar__cta">Book ↗</a>
+    </div>
+  </header>
+
+  <main class="deck" id="deck">
+
+    <!-- 1 HERO -->
+    <section class="slide is-active slide--dark" id="s1" data-slide="1" data-title="Hands-On Harness Engineering Tutorial">
+      <div class="slide__in center">
+        <div class="hero__grid"></div>
+        <div class="eyebrow">Tutorial Class · 10 Chapter Labs</div>
+        <h1 class="hero__title">HANDS-ON HARNESS ENGINEERING</h1>
+        <div class="hero__acronym"><b>Book</b> patterns · <b>Lab</b> evidence · <b>Class</b> practice</div>
+        <p class="hero__sub">Build and run the companion labs for <strong>Harness Engineering: Design Patterns for Securing Long-Horizon Multi-Agent AI Systems</strong>.</p>
+        <div class="hero__presenter">
+          <p>Presented by <strong>Ken Huang, CISSP</strong><br/>Adjunct Professor, USF · CSA AI Safety Co-Chair · CEO, DistributedApps.ai</p>
+        </div>
+        <div class="hero__actions">
+          <a href="#2" class="bar__cta">Start Presentation ➔</a>
+          <a href="https://github.com/PacktPublishing/Harness-Engineering-Design-Patterns" target="_blank" rel="noopener" class="bar__cta bar__cta--alt">Clone Labs ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 ABOUT (copied pattern from ROI #2) -->
+    <section class="slide" id="s2" data-slide="2" data-title="About the Instructor: Ken Huang, CISSP">
+      <div class="slide__in">
+        <span class="kicker">Instructor</span>
+        <h2 class="h2">Ken Huang, CISSP</h2>
+        <div id="slide-content-wrap" class="instructor-slide-grid">
+          <div class="instructor-info-col">
+            <svg viewBox="0 0 800 110" class="slide-svg">
+              <defs>
+                <clipPath id="headshot-circle">
+                  <circle cx="65" cy="55" r="32"></circle>
+                </clipPath>
+              </defs>
+              <rect x="15" y="6" width="770" height="98" rx="14" fill="#FAF9F5" stroke="#D97757" stroke-width="2.5"></rect>
+              <circle cx="65" cy="55" r="34" fill="#F5E6DF" stroke="#BD5D3A" stroke-width="2.5"></circle>
+              <image href="assets/images/ken-head-shot.png" x="31" y="21" width="68" height="68" clip-path="url(#headshot-circle)" preserveAspectRatio="xMidYMid slice"></image>
+              <text x="115" y="44" fill="#141413" font-family="Inter" font-size="16.5" font-weight="900">KEN HUANG, CISSP — INSTRUCTOR &amp; AI SAFETY RESEARCHER</text>
+              <text x="115" y="68" fill="#6B6B63" font-family="Inter" font-size="12" font-weight="600">Author, Harness Engineering &amp; MAESTRO | Adjunct Professor, University of San Francisco</text>
+              <text x="115" y="88" fill="#BD5D3A" font-family="Inter" font-size="11.5" font-weight="750">CSA Fellow &amp; Co-Chair | OWASP AIVSS Lead | AIUC-1 Consortium | Schmidt Sciences</text>
+            </svg>
+            <ul class="main-bullets dense-columns">
+              <li class="bullet-group"><div class="primary-bullet">🎓 Adjunct Professor, USF · AI author (Cambridge, Springer, Wiley, Packt, CMP, PKUP)</div></li>
+              <li class="bullet-group"><div class="primary-bullet">🛡️ CSA Fellow (MAESTRO, AICM) · OWASP AIVSS Lead</div></li>
+              <li class="bullet-group"><div class="primary-bullet">🚀 CEO, DistributedApps.ai</div></li>
+            </ul>
+          </div>
+          <div class="author-books-card">
+            <div class="author-books-header">
+              <span>📚 AI Books &amp; Academic Publications</span>
+              <a href="https://www.amazon.com/stores/author/B0D3J7L7GN" target="_blank" rel="noopener noreferrer">Amazon Author Page ➔</a>
+            </div>
+            <div class="books-pubs-stack">
+              <div class="books-gallery-grid">
+                <a href="https://www.amazon.com/dp/3031900251" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Agentic AI: Theories and Practices (Springer)">
+                  <img src="assets/images/books/springer_agentic_ai.jpg" alt="Agentic AI (Springer)" class="book-cover-img">
+                  <div class="book-item-title">Agentic AI</div>
+                  <div class="book-publisher-tag">SPRINGER</div>
+                </a>
+                <a href="https://www.amazon.com/dp/3031448839" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Beyond AI (Springer)">
+                  <img src="assets/images/books/springer_beyond_ai.jpg" alt="Beyond AI (Springer)" class="book-cover-img">
+                  <div class="book-item-title">Beyond AI</div>
+                  <div class="book-publisher-tag">SPRINGER</div>
+                </a>
+                <a href="https://www.amazon.com/dp/3031542517" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Generative AI Security (Springer)">
+                  <img src="assets/images/books/springer_generative_ai_security.jpg" alt="GenAI Security (Springer)" class="book-cover-img">
+                  <div class="book-item-title">GenAI Security</div>
+                  <div class="book-publisher-tag">SPRINGER</div>
+                </a>
+                <a href="https://www.amazon.com/dp/3031901002" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Securing AI Agents (Springer)">
+                  <img src="assets/images/books/springer_securing_ai_agents.jpg" alt="Securing AI Agents (Springer)" class="book-cover-img">
+                  <div class="book-item-title">Securing Agents</div>
+                  <div class="book-publisher-tag">SPRINGER</div>
+                </a>
+                <a href="https://www.amazon.com/dp/1009384467" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Web3 (Cambridge)">
+                  <img src="assets/images/books/cambridge_web3.jpg" alt="Web3 (Cambridge UP)" class="book-cover-img">
+                  <div class="book-item-title">Web3 &amp; Economy</div>
+                  <div class="book-publisher-tag">CAMBRIDGE</div>
+                </a>
+                <a href="https://www.amazon.com/dp/1394186524" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Blockchain and Web3 (Wiley)">
+                  <img src="assets/images/books/wiley_blockchain_web3.jpg" alt="Blockchain &amp; Web3 (Wiley)" class="book-cover-img">
+                  <div class="book-item-title">Blockchain Web3</div>
+                  <div class="book-publisher-tag">WILEY</div>
+                </a>
+                <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Harness Engineering">
+                  <img src="assets/images/books/harness_engineering.jpg" alt="Harness Engineering" class="book-cover-img">
+                  <div class="book-item-title">Harness Eng.</div>
+                  <div class="book-publisher-tag">BEST SELLER</div>
+                </a>
+                <a href="https://www.amazon.com/dp/1807785017" target="_blank" rel="noopener noreferrer" class="book-item-card" title="OpenClaw AI in Production (Packt)">
+                  <img src="assets/images/books/openclaw_ai_in_production.jpg" alt="OpenClaw AI in Production" class="book-cover-img">
+                  <div class="book-item-title">OpenClaw AI</div>
+                  <div class="book-publisher-tag">PACKT</div>
+                </a>
+                <a href="https://www.amazon.com/dp/B0H8JW9XFN" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Engineering Agentic AI with Claude">
+                  <img src="assets/images/books/engineering_agentic_ai_claude.jpg" alt="Engineering Agentic AI with Claude" class="book-cover-img">
+                  <div class="book-item-title">Claude Agentic</div>
+                  <div class="book-publisher-tag">NEW RELEASE</div>
+                </a>
+                <a href="https://www.amazon.com/dp/3032336686" target="_blank" rel="noopener noreferrer" class="book-item-card" title="Humanoid Robots and Physical AI (Springer)">
+                  <img src="assets/images/books/springer_humanoid_robots.jpg" alt="Humanoid Robots and Physical AI (Springer)" class="book-cover-img">
+                  <div class="book-item-title">Humanoid Robots</div>
+                  <div class="book-publisher-tag">SPRINGER</div>
+                </a>
+              </div>
+              <div class="publishers-section">
+                <div class="publishers-header">
+                  <span class="publishers-title">My books were published by Academic &amp; Global Publishers</span>
+                  <span class="publishers-sub">Peer-Reviewed Books, Monographs &amp; Handbooks</span>
+                </div>
+                <div class="publishers-grid">
+                  <a href="https://www.cambridge.org/" target="_blank" rel="noopener noreferrer" class="publisher-card" title="Cambridge University Press">
+                    <div class="publisher-logo-wrap"><img src="assets/images/publishers/cambridge_university_press.svg" alt="Cambridge University Press" class="publisher-logo-img"></div>
+                    <div class="publisher-tag">Cambridge UP</div>
+                  </a>
+                  <a href="https://link.springer.com/" target="_blank" rel="noopener noreferrer" class="publisher-card" title="Springer">
+                    <div class="publisher-logo-wrap"><img src="assets/images/publishers/springer.svg" alt="Springer" class="publisher-logo-img"></div>
+                    <div class="publisher-tag">Springer</div>
+                  </a>
+                  <a href="https://www.wiley.com/" target="_blank" rel="noopener noreferrer" class="publisher-card" title="Wiley">
+                    <div class="publisher-logo-wrap"><img src="assets/images/publishers/wiley.svg" alt="Wiley" class="publisher-logo-img"></div>
+                    <div class="publisher-tag">Wiley</div>
+                  </a>
+                  <a href="https://www.packtpub.com/" target="_blank" rel="noopener noreferrer" class="publisher-card" title="Packt Publishing">
+                    <div class="publisher-logo-wrap"><img src="assets/images/publishers/packt.svg" alt="Packt" class="publisher-logo-img"></div>
+                    <div class="publisher-tag">Packt</div>
+                  </a>
+                  <a href="http://www.cmpbook.com/" target="_blank" rel="noopener noreferrer" class="publisher-card" title="China Machine Press">
+                    <div class="publisher-logo-wrap"><img src="assets/images/publishers/china_machine_press.png" alt="China Machine Press" class="publisher-logo-img"></div>
+                    <div class="publisher-tag">China Machine Press</div>
+                  </a>
+                  <a href="https://www.pup.cn/" target="_blank" rel="noopener noreferrer" class="publisher-card" title="Beijing University Press">
+                    <div class="publisher-logo-wrap"><img src="assets/images/publishers/beijing_university_press.svg" alt="Beijing University Press" class="publisher-logo-img"></div>
+                    <div class="publisher-tag">Beijing Univ. Press</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 AGENDA -->
+    <section class="slide slide--alt" id="s3" data-slide="3" data-title="Class Agenda: 10 Hands-On Chapter Labs">
+      <div class="slide__in">
+        <span class="kicker">Agenda</span>
+        <h2 class="h2">Ten Chapters · Ten Executable Labs</h2>
+        <p class="lead">Each lab returns a <code>LabResult</code> JSON: allow / deny / escalate / warn with inspectable evidence.</p>
+        <div class="agenda-grid">
+          <div class="agenda-item"><b>Ch 01</b><span>Control plane vs unsafe swarm</span></div>
+          <div class="agenda-item"><b>Ch 02</b><span>Autonomy ladder &amp; leases</span></div>
+          <div class="agenda-item"><b>Ch 03</b><span>Identity &amp; delegation</span></div>
+          <div class="agenda-item"><b>Ch 04</b><span>Intent contracts</span></div>
+          <div class="agenda-item"><b>Ch 05</b><span>Context firewall</span></div>
+          <div class="agenda-item"><b>Ch 06</b><span>Memory ledger</span></div>
+          <div class="agenda-item"><b>Ch 07</b><span>Traces &amp; hill-climb</span></div>
+          <div class="agenda-item"><b>Ch 08</b><span>Runtime steering</span></div>
+          <div class="agenda-item"><b>Ch 09</b><span>Fleet scalability</span></div>
+          <div class="agenda-item"><b>Ch 10</b><span>Data governance</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 SETUP -->
+    <section class="slide" id="s4" data-slide="4" data-title="Environment Setup: Clone, Install, Run Labs">
+      <div class="slide__in">
+        <span class="kicker">Setup · Run Once</span>
+        <h2 class="h2">Lab Environment (No Cloud Keys Required)</h2>
+        <p class="lead">These chapter labs are deterministic Python. No paid model API is required to pass.</p>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Steps</span><span>Clone &amp; install</span></h3>
+            <div class="lab-cmd">git clone https://github.com/PacktPublishing/Harness-Engineering-Design-Patterns.git
+cd Harness-Engineering-Design-Patterns
+python -m venv .venv
+# Windows: .venv\Scripts\Activate.ps1
+# macOS/Linux: source .venv/bin/activate
+python -m pip install -e .
+python -m harnesslab.cli list
+python -m harnesslab.cli run all</div>
+            <div class="chip-row">
+              <span class="chip">Python ≥ 3.11</span>
+              <span class="chip">Clone (not ZIP)</span>
+              <span class="chip">stdlib-only labs</span>
+            </div>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Verify</span><span>What “pass” means</span></h3>
+            <ul class="clean-list">
+              <li>• <code>harnesslab list</code> shows ch01–ch10 with book titles.</li>
+              <li>• Each run prints <code>PASS</code> plus a decision narrative.</li>
+              <li>• Inspect <code>chapters/chXX/LabResult/result.json</code> for allow/deny/escalate counts.</li>
+              <li>• Optional coding-agent course setup pattern: <a href="https://kenhuangus.github.io/packt-harness/slides.html#1" target="_blank" rel="noopener">packt-harness slides</a> (different repo; LLM env examples).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 01 -->
+    <section class="slide slide--alt" id="s5" data-slide="5" data-title="Ch01 Lab: Control Plane vs Unsafe Swarm">
+      <div class="slide__in">
+        <span class="kicker">Chapter 1 · Hands-On</span>
+        <h2 class="h2">Harness as the Control Plane</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch01 --json
+# or: python -m chapters.ch01.run</div>
+            <ul class="clean-list">
+              <li>• Map unsafe shared-credential swarm → harnessed path.</li>
+              <li>• Confirm denials for poisoned memory / vault / unapproved egress.</li>
+              <li>• Confirm escalation before privileged deploy + checkpoint.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Score ≈ 0.98 with mixed allow/deny/escalate/warn.</li>
+              <li>• Ask: which decision proves the control plane, not the prompt?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">control plane</span><span class="chip">evidence matrix</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 02 -->
+    <section class="slide" id="s6" data-slide="6" data-title="Ch02 Lab: Autonomy Ladder and Leases">
+      <div class="slide__in">
+        <span class="kicker">Chapter 2 · Hands-On</span>
+        <h2 class="h2">Autonomy: Graduated Control</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch02 --json</div>
+            <ul class="clean-list">
+              <li>• Allow low-risk reversible work; queue supervised actions.</li>
+              <li>• Block budget exhaustion and non-waivable secret access.</li>
+              <li>• Renew an expired lease; execute rollback for a reversible write.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Score 1.0 with many escalations — that is the ladder working.</li>
+              <li>• Ask: which actions should never be waivable by a prompt?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">budgets</span><span class="chip">lease renewal</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 03 -->
+    <section class="slide slide--alt" id="s7" data-slide="7" data-title="Ch03 Lab: Identity and Delegation Chains">
+      <div class="slide__in">
+        <span class="kicker">Chapter 3 · Hands-On</span>
+        <h2 class="h2">Per-Agent Identity &amp; Delegation</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch03 --json</div>
+            <ul class="clean-list">
+              <li>• Create planner / reader / patcher / auditor identities.</li>
+              <li>• Prove audience binding: ticketing OK, wrong audience denied.</li>
+              <li>• Revoke, rotate across pause/resume, least-privilege scopes.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Artifacts include agents, audiences, chains, revoked subjects.</li>
+              <li>• Ask: why is resume a new security moment?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">audience</span><span class="chip">revocation</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 04 -->
+    <section class="slide" id="s8" data-slide="8" data-title="Ch04 Lab: Intent Contracts and Drift">
+      <div class="slide__in">
+        <span class="kicker">Chapter 4 · Hands-On</span>
+        <h2 class="h2">Intent: Contracts &amp; Purpose AuthZ</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch04 --json</div>
+            <ul class="clean-list">
+              <li>• Allow remediation under contract; warn on purpose drift.</li>
+              <li>• Deny deploy / email outside purpose; rewrite unsafe email attempt.</li>
+              <li>• Escalate stale resume; reject wrong-purpose approval.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Expect 11 allow / 3 deny / 1 warn / 1 rewrite / 1 escalate.</li>
+              <li>• Ask: why is tool name not enough for authorization?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">purpose</span><span class="chip">reauthorization</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 05 -->
+    <section class="slide slide--alt" id="s9" data-slide="9" data-title="Ch05 Lab: Context Trust Tiers">
+      <div class="slide__in">
+        <span class="kicker">Chapter 5 · Hands-On</span>
+        <h2 class="h2">Context: Provenance &amp; Poisoning</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch05 --json</div>
+            <ul class="clean-list">
+              <li>• Select high-assurance profile; release only fresh trusted context.</li>
+              <li>• Quarantine external injection; block lethal-trifecta egress.</li>
+              <li>• Persist quarantine evidence; checkpoint the long-running run.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Artifacts: profile, quarantine ledger, released vs inspected context.</li>
+              <li>• Ask: private data + tool + external sink — which leg do you cut first?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">trust tiers</span><span class="chip">quarantine</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 06 -->
+    <section class="slide" id="s10" data-slide="10" data-title="Ch06 Lab: Memory Firewall and Forgetting">
+      <div class="slide__in">
+        <span class="kicker">Chapter 6 · Hands-On</span>
+        <h2 class="h2">Memory: Ledger &amp; Forgetting</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch06 --json</div>
+            <ul class="clean-list">
+              <li>• Gate writes; promote only through handoff path.</li>
+              <li>• Isolate tenants; expire by TTL; tombstone on rollback.</li>
+              <li>• Block recursive memory poisoning before durable behavior changes.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Ledger shows allow/deny with tombstones — not silent deletes.</li>
+              <li>• Ask: can forgotten memory be resurrected by a later agent?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">TTL</span><span class="chip">tombstone</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 07 -->
+    <section class="slide slide--alt" id="s11" data-slide="11" data-title="Ch07 Lab: Observability and Hill-Climbing">
+      <div class="slide__in">
+        <span class="kicker">Chapter 7 · Hands-On</span>
+        <h2 class="h2">Observability, Evals, Hill-Climbing</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch07 --json</div>
+            <ul class="clean-list">
+              <li>• Redact → seal evidence → six-step decision trace.</li>
+              <li>• Escalate <code>aggressive_trace_sampling</code> regression.</li>
+              <li>• Deny ungoverned RSI; allow bounded supervised rollout.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• decision_trace length = 6; hashes in evidence envelope.</li>
+              <li>• Ask: why is latency gain not enough to accept a candidate?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">replay</span><span class="chip">regression gates</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 08 -->
+    <section class="slide" id="s12" data-slide="12" data-title="Ch08 Lab: Runtime Steering">
+      <div class="slide__in">
+        <span class="kicker">Chapter 8 · Hands-On</span>
+        <h2 class="h2">Runtime Steering &amp; Safe Rollback</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch08 --json</div>
+            <ul class="clean-list">
+              <li>• Warn on hostile context; pause; inject temporary policy overlay.</li>
+              <li>• Block unsafe outbound; kill retrying subtask.</li>
+              <li>• Resume from checkpoint; compensate; expire overlay.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Overlay expiry appears in decisions — temporary means temporary.</li>
+              <li>• Ask: kill vs pause — when do you preserve forensic state?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">overlay</span><span class="chip">compensation</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 09 -->
+    <section class="slide slide--alt" id="s13" data-slide="13" data-title="Ch09 Lab: Fleet Scalability">
+      <div class="slide__in">
+        <span class="kicker">Chapter 9 · Hands-On</span>
+        <h2 class="h2">Scalability Without Cascading Failure</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch09 --json</div>
+            <ul class="clean-list">
+              <li>• Tenant bulkheads, queues, quotas, rate windows.</li>
+              <li>• Quarantine compromised worker; idempotent retry.</li>
+              <li>• Pause across governance epochs without duplicating side effects.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Artifacts: fleet, idempotency ledger, rate_limits, unsafe_paths.</li>
+              <li>• Ask: is the queue growing because the model is slow — or the tool?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">bulkhead</span><span class="chip">idempotency</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 10 -->
+    <section class="slide" id="s14" data-slide="14" data-title="Ch10 Lab: Data Governance">
+      <div class="slide__in">
+        <span class="kicker">Chapter 10 · Hands-On</span>
+        <h2 class="h2">Classification-Aware Egress &amp; Compliance</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Do this</span><span>Run &amp; inspect</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run ch10 --json</div>
+            <ul class="clean-list">
+              <li>• Route labeled data through approved profiles.</li>
+              <li>• Block unsafe egress / residency drift; escalate secret leakage.</li>
+              <li>• Persist labels across resume; prove erasure across memory + traces.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Pass signal</span><span>Evidence to discuss</span></h3>
+            <ul class="clean-list">
+              <li>• Deletion evidence must cover memory and trace artifacts.</li>
+              <li>• Ask: where do labels usually get lost in your real stack?</li>
+            </ul>
+            <div class="chip-row"><span class="chip">labels</span><span class="chip">erasure</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSE -->
+    <section class="slide slide--alt" id="s15" data-slide="15" data-title="Close: Run All Labs and Teach the Evidence">
+      <div class="slide__in">
+        <span class="kicker">Close</span>
+        <h2 class="h2">Class Finish Line</h2>
+        <div class="lab-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">Run everything</span><span>One command</span></h3>
+            <div class="lab-cmd">python -m harnesslab.cli run all
+# Optional coding-agent env patterns:
+# https://kenhuangus.github.io/packt-harness/slides.html#1</div>
+            <ul class="clean-list">
+              <li>• Teaching loop: run → inspect JSON → change one failure → re-run.</li>
+              <li>• Prefer evidence fields over the pass flag in discussion.</li>
+            </ul>
+          </div>
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Resources</span><span>Book + labs</span></h3>
+            <ul class="clean-list">
+              <li>• Book: <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener">Harness Engineering (Kindle)</a></li>
+              <li>• Labs: <a href="https://github.com/PacktPublishing/Harness-Engineering-Design-Patterns" target="_blank" rel="noopener">PacktPublishing/Harness-Engineering-Design-Patterns</a></li>
+              <li>• Author site: <a href="https://distributedapps.ai/" target="_blank" rel="noopener">distributedapps.ai</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="ctrl" aria-label="Slide Controls">
+    <button type="button" class="ctrl__btn" id="prevBtn" aria-label="Previous Slide">‹ Prev</button>
+    <div class="dots" id="dots" role="tablist"></div>
+    <span class="ctrl__count" id="count">1 / 15</span>
+    <button type="button" class="ctrl__btn ctrl__btn--accent" id="nextBtn" aria-label="Next Slide">Next ›</button>
+  </nav>
+
+  <div class="progress" id="progress"></div>
+
+  <script src="assets/i18n.js?v=20261026a"></script>
+  <script src="assets/rough.min.js"></script>
+  <script src="assets/diagrams.js"></script>
+  <script src="assets/deck.js"></script>
+</body>
+</html>
