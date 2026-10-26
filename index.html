@@ -108,7 +108,7 @@
     <div class="bar__actions">
       <select id="slideSelect" class="slide-select" aria-label="Select Slide"></select>
       <div class="goto-group" title="Jump to slide number (or press 'g')">
-        <input type="number" id="gotoInput" min="1" max="17" placeholder="#" class="goto-input" aria-label="Go to slide number">
+        <input type="number" id="gotoInput" min="1" max="21" placeholder="#" class="goto-input" aria-label="Go to slide number">
         <button type="button" class="btn-goto" id="gotoBtn">Go ➔</button>
       </div>
       <button type="button" class="bar__btn" id="fsBtn" aria-label="Toggle Fullscreen (F)" title="Toggle Fullscreen (F)">
@@ -323,8 +323,157 @@
       </div>
     </section>
 
-    <!-- SLIDE 5: UNIVERSAL ENVIRONMENT SETUP -->
-    <section class="slide slide--alt" id="s5" data-slide="5" data-title="Universal Environment Setup: Clone, Install, Run">
+    <!-- SLIDE 5: CURRICULUM SYLLABUS & DELIVERY TRACKS -->
+    <section class="slide slide--alt" id="s5" data-slide="5" data-title="Curriculum Syllabus & Delivery Tracks">
+      <div class="slide__in">
+        <span class="kicker">Course Design</span>
+        <h2 class="h2">Curriculum Syllabus &amp; Flexible Delivery Formats</h2>
+        <p class="lead">Structured for 3 delivery models: 4-Hour Executive Workshop, 2-Day Engineering Bootcamp, and 4-Week University Seminar.</p>
+        
+        <div class="tracks-grid">
+          <!-- Track A -->
+          <div class="track-card">
+            <div class="track-head">
+              <span class="track-title">Format A: Executive Intensive</span>
+              <span class="track-badge">4 Hours</span>
+            </div>
+            <div class="track-audience">Audience: CTOs, VP Eng, Chief Risk/Security Officers, Principal Architects</div>
+            <ul class="track-list">
+              <li>• Chapters 1, 3, 5, 7, 10 deep dive</li>
+              <li>• Control plane vs model layer risk boundary</li>
+              <li>• Enterprise platform mapping matrix</li>
+              <li>• 5-Gate production readiness audit</li>
+            </ul>
+          </div>
+
+          <!-- Track B -->
+          <div class="track-card track-card--focus">
+            <div class="track-head">
+              <span class="track-title">Format B: Engineering Bootcamp</span>
+              <span class="track-badge">2 Days (16h)</span>
+            </div>
+            <div class="track-audience">Audience: Backend, Platform, Security &amp; Applied AI Engineers</div>
+            <ul class="track-list">
+              <li>• All 10 executable chapter scenarios</li>
+              <li>• Hands-on failure injection challenges</li>
+              <li>• ADR authoring and architecture defense</li>
+              <li>• 3-agent capstone fleet build &amp; deploy</li>
+            </ul>
+          </div>
+
+          <!-- Track C -->
+          <div class="track-card">
+            <div class="track-head">
+              <span class="track-title">Format C: University Seminar</span>
+              <span class="track-badge">4 Weeks (12h)</span>
+            </div>
+            <div class="track-audience">Audience: Graduate CS &amp; Cybersecurity Students (e.g. USF)</div>
+            <ul class="track-list">
+              <li>• Weekly reading &amp; workbook worksheets</li>
+              <li>• Socratic discussions &amp; architectural trade-offs</li>
+              <li>• Graded ADR proposal submissions</li>
+              <li>• Capstone fleet defense &amp; oral review</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5-Step Protocol Banner -->
+        <div class="protocol-row">
+          <div class="protocol-step">
+            <div class="protocol-step-num">Step 1</div>
+            <div class="protocol-step-desc"><strong>Run Scenario</strong><br/>Execute baseline lab CLI</div>
+          </div>
+          <div class="protocol-step">
+            <div class="protocol-step-num">Step 2</div>
+            <div class="protocol-step-desc"><strong>Inspect Output</strong><br/>Audit decisions &amp; hashes</div>
+          </div>
+          <div class="protocol-step">
+            <div class="protocol-step-num">Step 3</div>
+            <div class="protocol-step-desc"><strong>Inject Failure</strong><br/>Bypass or exceed limits</div>
+          </div>
+          <div class="protocol-step">
+            <div class="protocol-step-num">Step 4</div>
+            <div class="protocol-step-desc"><strong>Verify Invariant</strong><br/>Confirm deterministic block</div>
+          </div>
+          <div class="protocol-step">
+            <div class="protocol-step-num">Step 5</div>
+            <div class="protocol-step-desc"><strong>Map to Prod</strong><br/>SPIFFE, OPA, OTel, Temporal</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: CORE CONTROL TAXONOMIES & STEERING FIELD MANUAL -->
+    <section class="slide" id="s6" data-slide="6" data-title="Core Control Taxonomies & Steering Field Manual">
+      <div class="slide__in">
+        <span class="kicker">Field Manual</span>
+        <h2 class="h2">Core Control Taxonomies &amp; Runtime Steering Lifecycle</h2>
+        <p class="lead">The four deterministic vocabulary primitives and the seven-action steering lifecycle enforced across all chapters.</p>
+
+        <div class="taxonomy-grid">
+          <div class="taxonomy-col">
+            <span class="taxonomy-title">Policy Decisions</span>
+            <div class="taxonomy-item"><code>allow</code> Permitted safe action</div>
+            <div class="taxonomy-item"><code>deny</code> Blocked unapproved action</div>
+            <div class="taxonomy-item"><code>escalate</code> Human sign-off required</div>
+            <div class="taxonomy-item"><code>warn</code> Alert emitted; run continues</div>
+            <div class="taxonomy-item"><code>rewrite</code> Call sanitized transparently</div>
+          </div>
+
+          <div class="taxonomy-col">
+            <span class="taxonomy-title">Trust Tiers</span>
+            <div class="taxonomy-item"><code>system</code> Immutable platform core</div>
+            <div class="taxonomy-item"><code>tenant</code> Authenticated org policy</div>
+            <div class="taxonomy-item"><code>trusted_tool</code> Vetted integrations</div>
+            <div class="taxonomy-item"><code>user</code> Authenticated human operator</div>
+            <div class="taxonomy-item"><code>external</code> Untrusted web submissions</div>
+            <div class="taxonomy-item"><code>quarantined</code> Injected payloads</div>
+          </div>
+
+          <div class="taxonomy-col">
+            <span class="taxonomy-title">Data Classifications</span>
+            <div class="taxonomy-item"><code>public</code> Unrestricted distribution</div>
+            <div class="taxonomy-item"><code>internal</code> Internal org data</div>
+            <div class="taxonomy-item"><code>confidential</code> Proprietary IP / models</div>
+            <div class="taxonomy-item"><code>pii</code> Personally identifiable data</div>
+            <div class="taxonomy-item"><code>secret</code> Tokens, keys, credentials</div>
+            <div class="taxonomy-item"><code>regulated</code> Cross-border residency data</div>
+          </div>
+
+          <div class="taxonomy-col">
+            <span class="taxonomy-title">Action Risks</span>
+            <div class="taxonomy-item"><code>read</code> Read-only; zero side effects</div>
+            <div class="taxonomy-item"><code>reversible_write</code> Sandboxed with rollback</div>
+            <div class="taxonomy-item"><code>external_comm</code> Outbound egress / emails</div>
+            <div class="taxonomy-item"><code>irreversible_write</code> Permanent data mutations</div>
+            <div class="taxonomy-item"><code>privileged_op</code> Prod deploy / IAM edits</div>
+          </div>
+        </div>
+
+        <!-- 7-Step Steering Lifecycle -->
+        <div class="discussion-box" style="margin-top:0.45rem;">
+          <div class="discussion-title">⚡ The 7-Step Runtime Steering Lifecycle (Chapter 8 Primitive)</div>
+          <div class="lifecycle-bar" style="margin-top:0.25rem;">
+            <div class="lifecycle-step"><span>1. Observe (OTel)</span></div>
+            <span class="lifecycle-arrow">➔</span>
+            <div class="lifecycle-step"><span>2. Warn (Drift)</span></div>
+            <span class="lifecycle-arrow">➔</span>
+            <div class="lifecycle-step"><span>3. Pause (State Ckpt)</span></div>
+            <span class="lifecycle-arrow">➔</span>
+            <div class="lifecycle-step"><span>4. Block (Gateway)</span></div>
+            <span class="lifecycle-arrow">➔</span>
+            <div class="lifecycle-step"><span>5. Kill (Thread)</span></div>
+            <span class="lifecycle-arrow">➔</span>
+            <div class="lifecycle-step"><span>6. Quarantine</span></div>
+            <span class="lifecycle-arrow">➔</span>
+            <div class="lifecycle-step"><span>7. Recover (Overlay)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: UNIVERSAL ENVIRONMENT SETUP -->
+    <section class="slide slide--alt" id="s7" data-slide="7" data-title="Universal Environment Setup: Clone, Install, Run">
       <div class="slide__in">
         <span class="kicker">Setup · Run Once</span>
         <h2 class="h2">Universal Environment Setup (Zero Cloud Keys Required)</h2>
@@ -452,8 +601,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 6: CH 01 -->
-    <section class="slide" id="s6" data-slide="6" data-title="Ch 01 Lab: Control Plane vs Unsafe Swarm">
+    <!-- SLIDE 8: CH 01 -->
+    <section class="slide" id="s8" data-slide="8" data-title="Ch 01 Lab: Control Plane vs Unsafe Swarm">
       <div class="slide__in">
         <span class="kicker">Chapter 01 · Hands-On Lab</span>
         <h2 class="h2">Harness as the Control Plane for Long-Horizon Multi-Agent Systems</h2>
@@ -496,8 +645,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 7: CH 02 -->
-    <section class="slide slide--alt" id="s7" data-slide="7" data-title="Ch 02 Lab: Autonomy Ladder and Leases">
+    <!-- SLIDE 9: CH 02 -->
+    <section class="slide slide--alt" id="s9" data-slide="9" data-title="Ch 02 Lab: Autonomy Ladder and Leases">
       <div class="slide__in">
         <span class="kicker">Chapter 02 · Hands-On Lab</span>
         <h2 class="h2">Autonomy: Graduated Control and Human Oversight</h2>
@@ -540,8 +689,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 8: CH 03 -->
-    <section class="slide" id="s8" data-slide="8" data-title="Ch 03 Lab: Identity and Delegation Chains">
+    <!-- SLIDE 10: CH 03 -->
+    <section class="slide" id="s10" data-slide="10" data-title="Ch 03 Lab: Identity and Delegation Chains">
       <div class="slide__in">
         <span class="kicker">Chapter 03 · Hands-On Lab</span>
         <h2 class="h2">Identity: Per-Agent Identity and Delegation Chains</h2>
@@ -584,8 +733,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 9: CH 04 -->
-    <section class="slide slide--alt" id="s9" data-slide="9" data-title="Ch 04 Lab: Intent Contracts and Drift">
+    <!-- SLIDE 11: CH 04 -->
+    <section class="slide slide--alt" id="s11" data-slide="11" data-title="Ch 04 Lab: Intent Contracts and Drift">
       <div class="slide__in">
         <span class="kicker">Chapter 04 · Hands-On Lab</span>
         <h2 class="h2">Intent: Contracts, Drift Detection, and Authorization by Purpose</h2>
@@ -628,8 +777,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 10: CH 05 -->
-    <section class="slide" id="s10" data-slide="10" data-title="Ch 05 Lab: Context Trust Tiers">
+    <!-- SLIDE 12: CH 05 -->
+    <section class="slide" id="s12" data-slide="12" data-title="Ch 05 Lab: Context Trust Tiers">
       <div class="slide__in">
         <span class="kicker">Chapter 05 · Hands-On Lab</span>
         <h2 class="h2">Context: Trust Tiers, Provenance, and Context-Poisoning Containment</h2>
@@ -672,8 +821,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 11: CH 06 -->
-    <section class="slide slide--alt" id="s11" data-slide="11" data-title="Ch 06 Lab: Memory Firewall and Forgetting">
+    <!-- SLIDE 13: CH 06 -->
+    <section class="slide slide--alt" id="s13" data-slide="13" data-title="Ch 06 Lab: Memory Firewall and Forgetting">
       <div class="slide__in">
         <span class="kicker">Chapter 06 · Hands-On Lab</span>
         <h2 class="h2">Memory: State Firewall, Ledger, and Forgetting</h2>
@@ -716,8 +865,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 12: CH 07 -->
-    <section class="slide" id="s12" data-slide="12" data-title="Ch 07 Lab: Observability and Hill-Climbing">
+    <!-- SLIDE 14: CH 07 -->
+    <section class="slide" id="s14" data-slide="14" data-title="Ch 07 Lab: Observability and Hill-Climbing">
       <div class="slide__in">
         <span class="kicker">Chapter 07 · Hands-On Lab</span>
         <h2 class="h2">Observability, Evals, and Hill-Climbing Evidence</h2>
@@ -760,8 +909,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 13: CH 08 -->
-    <section class="slide slide--alt" id="s13" data-slide="13" data-title="Ch 08 Lab: Runtime Steering">
+    <!-- SLIDE 15: CH 08 -->
+    <section class="slide slide--alt" id="s15" data-slide="15" data-title="Ch 08 Lab: Runtime Steering">
       <div class="slide__in">
         <span class="kicker">Chapter 08 · Hands-On Lab</span>
         <h2 class="h2">Runtime Steering: Intervention, Policy Injection, and Safe Rollback</h2>
@@ -804,8 +953,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 14: CH 09 -->
-    <section class="slide" id="s14" data-slide="14" data-title="Ch 09 Lab: Fleet Scalability">
+    <!-- SLIDE 16: CH 09 -->
+    <section class="slide" id="s16" data-slide="16" data-title="Ch 09 Lab: Fleet Scalability">
       <div class="slide__in">
         <span class="kicker">Chapter 09 · Hands-On Lab</span>
         <h2 class="h2">Scalability: Fleet Coordination Without Cascading Failure</h2>
@@ -848,8 +997,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 15: CH 10 -->
-    <section class="slide slide--alt" id="s15" data-slide="15" data-title="Ch 10 Lab: Data Governance">
+    <!-- SLIDE 17: CH 10 -->
+    <section class="slide slide--alt" id="s17" data-slide="17" data-title="Ch 10 Lab: Data Governance">
       <div class="slide__in">
         <span class="kicker">Chapter 10 · Hands-On Lab</span>
         <h2 class="h2">Data Governance: Classification-Aware Tools, Egress, and Compliance</h2>
@@ -892,8 +1041,46 @@
       </div>
     </section>
 
-    <!-- SLIDE 16: ENTERPRISE ARCHITECTURE MAPPING -->
-    <section class="slide" id="s16" data-slide="16" data-title="Enterprise Architecture: Tabletop to Production">
+    <!-- SLIDE 18: ARCHITECTURE DECISION RECORDS (ADR) -->
+    <section class="slide" id="s18" data-slide="18" data-title="Architecture Decision Records (ADRs) in Enterprise Practice">
+      <div class="slide__in">
+        <span class="kicker">Enterprise Governance</span>
+        <h2 class="h2">Architecture Decision Records (ADRs) for Agent Systems</h2>
+        <p class="lead">How enterprise platform teams formally propose, defend, and document deterministic control plane boundaries.</p>
+
+        <div class="adr-grid">
+          <div class="card card--focus">
+            <h3 class="card__title"><span class="tag tag--orange">ADR Structure</span><span>Standard Template</span></h3>
+            <ul class="clean-list" style="font-size:0.74rem;">
+              <li>• <strong>Context &amp; Threat Model:</strong> Documenting multi-agent attack surfaces, prompt injection risks, and long-horizon drifts.</li>
+              <li>• <strong>Decision Drivers:</strong> Sub-millisecond latency (&lt;5ms), mathematically non-bypassable, regulatory auditability.</li>
+              <li>• <strong>Considered Options:</strong> In-context alignment / LLM judges vs. deterministic code gateways.</li>
+              <li>• <strong>Decision Outcome:</strong> Decoupled code enforcement with append-only evidence hashing.</li>
+              <li>• <strong>Enterprise Platform Mapping:</strong> Translating lab primitives to OPA, SPIFFE, Temporal, and OpenTelemetry.</li>
+            </ul>
+            <div style="margin-top:0.35rem;">
+              <a href="https://github.com/kenhuangus/HarnessLab/blob/main/adr/TEMPLATE.md" target="_blank" rel="noopener" class="deep-link-btn">📄 adr/TEMPLATE.md ↗</a>
+            </div>
+          </div>
+
+          <div class="card card--defense">
+            <h3 class="card__title"><span class="tag tag--green">Case Study: ADR-001</span><span>Deterministic Control Plane Decoupling</span></h3>
+            <ul class="clean-list" style="font-size:0.74rem;">
+              <li>• <strong>Why Prompt Evaluators Fail:</strong> Inherit probabilistic model behavior; vulnerable to jailbreaks; incur 500–3000ms latency and high token cost per tool call.</li>
+              <li>• <strong>Deterministic Code Gateway:</strong> Intercepts tool calls out-of-band; evaluates tool schema, intent contract, and capability budget in &lt;1ms.</li>
+              <li>• <strong>Mathematical Invariant:</strong> Zero uncontracted privileged actions can execute, regardless of generated model tokens.</li>
+              <li>• <strong>Enterprise Mapping:</strong> Deployed as an Envoy sidecar proxy with Open Policy Agent (OPA) / Rego policies.</li>
+            </ul>
+            <div style="margin-top:0.35rem;">
+              <a href="https://github.com/kenhuangus/HarnessLab/blob/main/adr/ADR-001-deterministic-control-plane.md" target="_blank" rel="noopener" class="deep-link-btn">📑 adr/ADR-001-deterministic-control-plane.md ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 19: ENTERPRISE ARCHITECTURE MAPPING -->
+    <section class="slide slide--alt" id="s19" data-slide="19" data-title="Enterprise Architecture: Tabletop to Production">
       <div class="slide__in">
         <span class="kicker">Production Translation</span>
         <h2 class="h2">Enterprise Architecture Mapping (Tabletop to Production)</h2>
@@ -967,42 +1154,109 @@
       </div>
     </section>
 
-    <!-- SLIDE 17: CLOSE, CAPSTONE & WORKSHOP GUIDE -->
-    <section class="slide slide--alt" id="s17" data-slide="17" data-title="Tutorial Class Summary &amp; Capstone Project">
+    <!-- SLIDE 20: CAPSTONE MULTI-AGENT REMEDIATION FLEET -->
+    <section class="slide" id="s20" data-slide="20" data-title="Enterprise Capstone: Autonomous Security Remediation Fleet">
       <div class="slide__in">
-        <span class="kicker">Class Summary</span>
-        <h2 class="h2">Run All Labs, Certify Invariants &amp; Build the Capstone</h2>
-        <p class="lead">The measure of an agent system is not whether it generates code fast, but whether its harness can govern, trace, interrupt, and reverse its actions.</p>
+        <span class="kicker">Capstone Synthesis</span>
+        <h2 class="h2">Enterprise Capstone: 3-Agent Autonomous Remediation Fleet</h2>
+        <p class="lead">Synthesizing all ten harness control pillars into an executable multi-agent vulnerability remediation fleet.</p>
+
+        <div class="fleet-workflow-row">
+          <div class="fleet-agent-card">
+            <div class="fleet-agent-title">
+              <span>1️⃣ Triage Agent</span>
+              <span class="fleet-gate-tag">Gate 3: Context</span>
+            </div>
+            <div style="font-size:0.72rem; line-height:1.35; color:#2D2C28;">
+              • <strong>Role:</strong> Ingests untrusted bug reports (TrustTier.EXTERNAL).<br/>
+              • <strong>ContextFirewall:</strong> Detects and quarantines prompt injection overrides.<br/>
+              • <strong>Invariant:</strong> Unsanitized external inputs cannot reach coder context.
+            </div>
+          </div>
+
+          <div class="fleet-agent-card">
+            <div class="fleet-agent-title">
+              <span>2️⃣ Patch Agent</span>
+              <span class="fleet-gate-tag">Gate 2 &amp; 4: Intent/State</span>
+            </div>
+            <div style="font-size:0.72rem; line-height:1.35; color:#2D2C28;">
+              • <strong>Role:</strong> Writes targeted code patch diff in sandboxed repository.<br/>
+              • <strong>IntentContract:</strong> Bounded strictly to vulnerable module; unauthorized file edits blocked.<br/>
+              • <strong>MemoryFirewall:</strong> Persists patch pattern into append-only ledger.
+            </div>
+          </div>
+
+          <div class="fleet-agent-card">
+            <div class="fleet-agent-title">
+              <span>3️⃣ Deploy Agent</span>
+              <span class="fleet-gate-tag">Gate 1 &amp; 5: Auth/Audit</span>
+            </div>
+            <div style="font-size:0.72rem; line-height:1.35; color:#2D2C28;">
+              • <strong>Role:</strong> Deploys verified fix to production cluster.<br/>
+              • <strong>Audience Binding:</strong> Rejects triage or coder credentials.<br/>
+              • <strong>Human Oversight Gate:</strong> Requires signed operator token for privileged release.
+            </div>
+          </div>
+        </div>
+
+        <div class="card card--focus" style="margin-top:0.50rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <span class="tag tag--orange">Run Capstone Fleet</span>
+              <span style="font-size:0.76rem; font-weight:700; color:#141413;">Execute the 3-Agent Workflow</span>
+            </div>
+            <div class="lab-cmd-row" style="margin:0;">
+              <code class="lab-cmd-code">python -m harnesslab.cli capstone</code>
+              <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m harnesslab.cli capstone')">📋 Copy</button>
+            </div>
+            <div class="lab-cmd-row" style="margin:0;">
+              <code class="lab-cmd-code">python -m unittest discover -s capstone -p "test_*.py"</code>
+              <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m unittest discover -s capstone -p &quot;test_*.py&quot;')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 21: AUTOMATED STUDENT VERIFICATION & READINESS CERTIFICATION -->
+    <section class="slide slide--alt" id="s21" data-slide="21" data-title="Automated Student Verification &amp; Readiness Certification">
+      <div class="slide__in">
+        <span class="kicker">Readiness Certification</span>
+        <h2 class="h2">Automated Student Verification &amp; Production Certification</h2>
+        <p class="lead">Built-in verification engine validating all 10 chapter labs, 5 invariant failure injections, and issuing a tamper-evident certificate.</p>
+
         <div class="lab-grid">
           <div class="card card--focus">
-            <h3 class="card__title"><span class="tag tag--orange">Automated Student Certification</span><span>One-Click Readiness Audit</span></h3>
+            <h3 class="card__title"><span class="tag tag--orange">Automated CLI Audit</span><span>harnesslab verify</span></h3>
             <div class="lab-cmd-row">
               <code class="lab-cmd-code">python -m harnesslab.cli verify</code>
               <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m harnesslab.cli verify')">📋 Copy</button>
             </div>
-            <div class="lab-cmd-row">
-              <code class="lab-cmd-code">python -m harnesslab.cli capstone</code>
-              <button type="button" class="lab-copy-btn" onclick="copyCommand(this, 'python -m harnesslab.cli capstone')">📋 Copy</button>
+            <div class="terminal-scorecard">
+              <div class="terminal-scorecard-head">=== HARNESSLAB VERIFICATION SCORECARD ===</div>
+              <div>[PART 1] 10/10 Chapter Labs ........... <span class="scorecard-pass">✓ PASS (17ms)</span></div>
+              <div>[PART 2] 5 Safety Invariant Injections ... <span class="scorecard-pass">✓ PASS</span></div>
+              <div>[PART 3] 5-Gate Production Scorecard ..... <span class="scorecard-pass">✓ CERTIFIED</span></div>
+              <div>[PART 4] Capstone Remediation Fleet ..... <span class="scorecard-pass">✓ PASS</span></div>
+              <div style="margin-top:0.25rem;">SHA-256 Receipt: <span class="scorecard-hash">5ac911995d2f20d9...</span></div>
             </div>
-            <ul class="clean-list">
-              <li>• <strong>Readiness Verification:</strong> <code>harnesslab verify</code> executes all 10 chapter labs, 5 invariant checks, and issues a tamper-evident SHA-256 certificate.</li>
-              <li>• <strong>Teaching Protocol:</strong> 1. Run scenario ➔ 2. Inspect <code>result.json</code> ➔ 3. Inject one failure ➔ 4. Verify harness boundary ➔ 5. Map to enterprise.</li>
-            </ul>
           </div>
+
           <div class="card card--defense">
-            <h3 class="card__title"><span class="tag tag--green">Curriculum Hub &amp; Capstone</span><span>Student Resources</span></h3>
-            <ul class="clean-list">
+            <h3 class="card__title"><span class="tag tag--green">Complete Curriculum Hub</span><span>Student Resources</span></h3>
+            <ul class="clean-list" style="font-size:0.74rem;">
               <li>• <strong>Student Workbook:</strong> <a href="https://github.com/kenhuangus/HarnessLab/blob/main/WORKBOOK.md" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">WORKBOOK.md ↗</a> (10 lab worksheets + injection challenges)</li>
               <li>• <strong>Master Syllabus:</strong> <a href="https://github.com/kenhuangus/HarnessLab/blob/main/SYLLABUS.md" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">SYLLABUS.md ↗</a> (Executive, Bootcamp, University seminar tracks)</li>
               <li>• <strong>Quick Reference:</strong> <a href="https://github.com/kenhuangus/HarnessLab/blob/main/QUICK_REFERENCE.md" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">QUICK_REFERENCE.md ↗</a> (Decision mechanics &amp; steering cheat sheet)</li>
-              <li>• <strong>Architecture Decision Records:</strong> <a href="https://github.com/kenhuangus/HarnessLab/tree/main/adr" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">adr/ ↗</a> (Enterprise ADR templates &amp; examples)</li>
+              <li>• <strong>Architecture Decision Records:</strong> <a href="https://github.com/kenhuangus/HarnessLab/tree/main/adr" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">adr/ ↗</a> (Enterprise ADR templates &amp; case studies)</li>
               <li>• <strong>Capstone Fleet:</strong> <a href="https://github.com/kenhuangus/HarnessLab/tree/main/capstone" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">capstone/ ↗</a> (3-agent autonomous remediation fleet)</li>
+              <li>• <strong>Companion Book:</strong> <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">Harness Engineering (Amazon Kindle) ↗</a></li>
             </ul>
             <div class="chip-row">
               <span class="chip">#HarnessEngineering</span>
-              <span class="chip">#MultiAgentAI</span>
-              <span class="chip">#CapstoneFleet</span>
               <span class="chip">#ProductionReadiness</span>
+              <span class="chip">#EvidenceEnvelope</span>
+              <span class="chip">#MultiAgentAI</span>
             </div>
           </div>
         </div>
@@ -1014,7 +1268,7 @@
   <nav class="ctrl" aria-label="Slide Controls">
     <button type="button" class="ctrl__btn" id="prevBtn" aria-label="Previous Slide">‹ Prev</button>
     <div class="dots" id="dots" role="tablist"></div>
-    <span class="ctrl__count" id="count">1 / 17</span>
+    <span class="ctrl__count" id="count">1 / 21</span>
     <button type="button" class="ctrl__btn ctrl__btn--accent" id="nextBtn" aria-label="Next Slide">Next ›</button>
   </nav>
 
