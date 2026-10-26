@@ -1,7 +1,42 @@
 /* ============================================================
-   Agentic Commerce & Agentic Security Foundations — Deck Navigation
-   Supports 16 slides, keyboard, swipe, wheel, hash deep links & i18n
+   Hands-On Harness Engineering Tutorial Deck Navigation
+   Supports 15 slides, copyable commands, dropdown jump, keyboard, swipe, hash links
    ============================================================ */
+
+window.copyCommand = function (btn, text) {
+  if (!btn) return;
+  const originalHtml = btn.innerHTML;
+  function setSuccess() {
+    btn.classList.add("copied");
+    btn.innerHTML = "✔ Copied!";
+    setTimeout(() => {
+      btn.classList.remove("copied");
+      btn.innerHTML = originalHtml;
+    }, 1800);
+  }
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(setSuccess).catch(() => {
+      fallbackCopy(text, setSuccess);
+    });
+  } else {
+    fallbackCopy(text, setSuccess);
+  }
+};
+
+function fallbackCopy(text, cb) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    if (cb) cb();
+  } catch (err) {}
+  document.body.removeChild(ta);
+}
+
 (function () {
   const slides = Array.from(document.querySelectorAll(".slide"));
   const total = slides.length;
@@ -11,6 +46,9 @@
   const dotsWrap = document.getElementById("dots");
   const progress = document.getElementById("progress");
   const title = document.getElementById("slideTitle");
+  const slideSelect = document.getElementById("slideSelect");
+  const gotoInput = document.getElementById("gotoInput");
+  const gotoBtn = document.getElementById("gotoBtn");
 
   // Build dots
   slides.forEach((_, i) => {
@@ -21,6 +59,37 @@
     dotsWrap.appendChild(d);
   });
   const dots = Array.from(dotsWrap.children);
+
+  // Build slide dropdown options
+  if (slideSelect) {
+    slides.forEach((s, idx) => {
+      const opt = document.createElement("option");
+      opt.value = idx;
+      opt.textContent = `${idx + 1}. ${s.dataset.title || "Slide " + (idx + 1)}`;
+      slideSelect.appendChild(opt);
+    });
+    slideSelect.addEventListener("change", (e) => {
+      go(parseInt(e.target.value, 10));
+    });
+  }
+
+  function handleGoto() {
+    if (!gotoInput) return;
+    const val = parseInt(gotoInput.value, 10);
+    if (!isNaN(val) && val >= 1 && val <= total) {
+      go(val - 1);
+      gotoInput.value = "";
+    }
+  }
+  if (gotoBtn) gotoBtn.addEventListener("click", handleGoto);
+  if (gotoInput) {
+    gotoInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleGoto();
+      }
+    });
+  }
 
   let cur = 0;
 
@@ -42,6 +111,8 @@
     const activeSlide = slides[i];
     const localizedTitle = (window.AGENT_SEC_I18N && window.AGENT_SEC_I18N.getSlideTitle(i)) || activeSlide.dataset.title || "";
     title.textContent = localizedTitle;
+
+    if (slideSelect) slideSelect.value = i;
 
     progress.style.width = ((i) / (total - 1) * 100) + "%";
     prevBtn.disabled = i === 0;
@@ -137,6 +208,12 @@
     } else if (e.key === "f" || e.key === "F") {
       e.preventDefault();
       toggleFullscreen();
+    } else if (e.key === "g" || e.key === "G") {
+      if (gotoInput) {
+        e.preventDefault();
+        gotoInput.focus();
+        gotoInput.select();
+      }
     }
   });
 
@@ -173,11 +250,4 @@
   }
   window.addEventListener("hashchange", readHash);
   readHash();
-
-  // Language update listener
-  document.addEventListener("agentsec:lang", () => {
-    const localizedTitle = (window.AGENT_SEC_I18N && window.AGENT_SEC_I18N.getSlideTitle(cur)) || slides[cur].dataset.title || "";
-    title.textContent = localizedTitle;
-    updateFullscreenUI();
-  });
 })();
