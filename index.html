@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Kalam:wght@400;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=20261026b">
+  <link rel="stylesheet" href="assets/style.css?v=20261026c">
   <style>
     .lab-grid {
       display: grid;
@@ -19,15 +19,15 @@
       flex: 1;
     }
     .lab-grid .card { min-height: 0; }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.50rem; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.45rem; }
     .chip {
-      font-size: 0.70rem;
+      font-size: 0.68rem;
       font-weight: 700;
       border: 1.5px solid #D97757;
       color: #BD5D3A;
       background: #F5E6DF;
       border-radius: 999px;
-      padding: 0.16rem 0.50rem;
+      padding: 0.14rem 0.46rem;
     }
     .agenda-grid {
       display: grid;
@@ -54,8 +54,46 @@
       line-height: 1.25;
       color: #141413;
     }
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+      min-height: 0;
+      flex: 1;
+    }
+    .thesis-col {
+      background: #FAF9F5;
+      border: 1.5px solid #E5E2D9;
+      border-radius: 12px;
+      padding: 0.85rem 1.05rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .thesis-col--model { border-left: 4.5px solid #BD5D3A; }
+    .thesis-col--harness { border-left: 4.5px solid #2b8a3e; }
+    .lifecycle-strip {
+      background: #FAF8F2;
+      border: 1px solid #E5E2D9;
+      border-radius: 8px;
+      padding: 0.45rem 0.70rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.45rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .lifecycle-step {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #141413;
+    }
+    .lifecycle-arrow { color: #BD5D3A; font-weight: 900; }
     @media (max-width: 1100px) {
-      .lab-grid, .agenda-grid { grid-template-columns: 1fr; }
+      .lab-grid, .agenda-grid, .thesis-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -70,7 +108,7 @@
     <div class="bar__actions">
       <select id="slideSelect" class="slide-select" aria-label="Select Slide"></select>
       <div class="goto-group" title="Jump to slide number (or press 'g')">
-        <input type="number" id="gotoInput" min="1" max="15" placeholder="#" class="goto-input" aria-label="Go to slide number">
+        <input type="number" id="gotoInput" min="1" max="16" placeholder="#" class="goto-input" aria-label="Go to slide number">
         <button type="button" class="btn-goto" id="gotoBtn">Go ➔</button>
       </div>
       <button type="button" class="bar__btn" id="fsBtn" aria-label="Toggle Fullscreen (F)" title="Toggle Fullscreen (F)">
@@ -225,12 +263,51 @@
       </div>
     </section>
 
-    <!-- SLIDE 3: AGENDA -->
-    <section class="slide slide--alt" id="s3" data-slide="3" data-title="Class Agenda: 10 Hands-On Chapter Labs">
+    <!-- SLIDE 3: THE CORE HARNESS THESIS -->
+    <section class="slide slide--alt" id="s3" data-slide="3" data-title="Core Thesis: Deterministic Control Plane vs Probabilistic Model">
+      <div class="slide__in">
+        <span class="kicker">Core Thesis</span>
+        <h2 class="h2">Probabilistic Model vs. Deterministic Control Plane</h2>
+        <p class="lead">Autonomous search (hill-climbing) requires an objective function, bounded actions, state preservation, and rollback hooks — not an unmonitored loop.</p>
+        <div class="thesis-grid">
+          <div class="thesis-col thesis-col--model">
+            <h3 class="card__title"><span class="tag tag--orange">Probabilistic Model</span><span>Proposes Actions</span></h3>
+            <ul class="clean-list" style="font-size:0.80rem; line-height:1.45;">
+              <li>• <strong>Non-Deterministic Generation:</strong> The foundation model selects actions probabilistically from runtime context and prompts.</li>
+              <li>• <strong>Vulnerable Failure Modes:</strong> Prone to amnesia, prompt injection, intent drift, recursive retry loops, and unverified code edits.</li>
+              <li>• <strong>Why Prompts Fail:</strong> Prompts cannot enforce least privilege, verify delegation chains, persist tamper-evident traces, or guarantee rollback.</li>
+            </ul>
+          </div>
+          <div class="thesis-col thesis-col--harness">
+            <h3 class="card__title"><span class="tag tag--green">Deterministic Harness</span><span>Governs Execution</span></h3>
+            <ul class="clean-list" style="font-size:0.80rem; line-height:1.45;">
+              <li>• <strong>Mediated Authority:</strong> The control plane dictates what agents may know, remember, decide, delegate, execute, and observe.</li>
+              <li>• <strong>Deterministic Interception:</strong> Evaluates every tool call through five invariant layers: Identity, Purpose, Context, Memory, and Runtime Policy.</li>
+              <li>• <strong>Forensic Evidence:</strong> Generates tamper-evident SHA-256 envelopes, audit checkpoints, and immutable tombstones.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="lifecycle-strip">
+          <span style="color:#BD5D3A;">Long-Horizon Lifecycle:</span>
+          <div class="lifecycle-step"><span>1. Intake (Trust Tiers)</span></div>
+          <span class="lifecycle-arrow">➔</span>
+          <div class="lifecycle-step"><span>2. Purpose Gate (Contracts)</span></div>
+          <span class="lifecycle-arrow">➔</span>
+          <div class="lifecycle-step"><span>3. Tool Execution (Budgets)</span></div>
+          <span class="lifecycle-arrow">➔</span>
+          <div class="lifecycle-step"><span>4. Memory Ledger (Tombstones)</span></div>
+          <span class="lifecycle-arrow">➔</span>
+          <div class="lifecycle-step"><span>5. Resume (Token Rotation)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: AGENDA -->
+    <section class="slide" id="s4" data-slide="4" data-title="Class Agenda: 10 Hands-On Chapter Labs">
       <div class="slide__in">
         <span class="kicker">Course Map</span>
         <h2 class="h2">Ten Chapters · Ten Executable Labs</h2>
-        <p class="lead">Teaching Sequence: 1. Run CLI ➔ 2. Inspect JSON Decisions ➔ 3. Inject Failure Scenario ➔ 4. Verify Harness Control Invariant.</p>
+        <p class="lead">Hands-On Teaching Protocol: 1. Run CLI ➔ 2. Inspect Decisions ➔ 3. Inspect Artifacts ➔ 4. Inject Failure ➔ 5. Verify Invariant.</p>
         <div class="agenda-grid">
           <div class="agenda-item"><b>Ch 01 · Control Plane</b><span>Reference architecture vs unsafe shared swarm</span></div>
           <div class="agenda-item"><b>Ch 02 · Autonomy</b><span>Graduated ladder, capability budget, lease renewal</span></div>
@@ -246,8 +323,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 4: UNIVERSAL ENVIRONMENT SETUP (packt-harness reference) -->
-    <section class="slide" id="s4" data-slide="4" data-title="Universal Environment Setup: Clone, Install, Run">
+    <!-- SLIDE 5: UNIVERSAL ENVIRONMENT SETUP -->
+    <section class="slide slide--alt" id="s5" data-slide="5" data-title="Universal Environment Setup: Clone, Install, Run">
       <div class="slide__in">
         <span class="kicker">Setup · Run Once</span>
         <h2 class="h2">Universal Environment Setup (Zero Cloud Keys Required)</h2>
@@ -262,7 +339,7 @@
               <div style="font-size:0.80rem; line-height:1.45; color:#3A3935; display:flex; flex-direction:column; gap:0.50rem;">
                 <div>
                   🔑 <strong>Zero-Dependency Standard Library:</strong><br>
-                  Every scenario runs with pure Python 3.11+. No OpenAI/Anthropic API keys, no vector database accounts, and no paid cloud infrastructure needed.
+                  Every scenario runs with pure Python 3.11+. No OpenAI/Anthropic API keys, vector database credentials, or paid cloud infrastructure needed.
                 </div>
                 <div>
                   💡 <strong>Why the Virtual Environment:</strong><br>
@@ -273,10 +350,9 @@
                   Run with <code>--json</code> to inspect the exact decision records. Pre-captured evidence for comparison is stored under <code>chapters/chXX/LabResult/result.json</code>.
                 </div>
                 <div>
-                  🔗 <strong>Related Resources:</strong><br>
+                  🔗 <strong>Repository &amp; Book:</strong><br>
                   • <a href="https://github.com/kenhuangus/HarnessLab" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">HarnessLab Repository ↗</a><br>
-                  • <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">Harness Engineering Book (Kindle) ↗</a><br>
-                  • <a href="https://kenhuangus.github.io/packt-harness/slides.html#1" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">Coding Agent Setup Reference (packt-harness) ↗</a>
+                  • <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">Harness Engineering Book (Kindle) ↗</a>
                 </div>
               </div>
             </div>
@@ -299,9 +375,7 @@
                 <div class="cmd-code-row">
                   <span class="cmd-code-prompt">$</span>
                   <code class="cmd-code-text">git clone https://github.com/kenhuangus/HarnessLab.git</code>
-                  <button type="button" class="cmd-copy-btn" onclick="copyCommand(this, 'git clone https://github.com/kenhuangus/HarnessLab.git')">
-                    📋 Copy
-                  </button>
+                  <button type="button" class="cmd-copy-btn" onclick="copyCommand(this, 'git clone https://github.com/kenhuangus/HarnessLab.git')">📋 Copy</button>
                 </div>
               </div>
 
@@ -314,9 +388,7 @@
                 <div class="cmd-code-row" style="margin-bottom:0.15rem;">
                   <span class="cmd-code-prompt">$</span>
                   <code class="cmd-code-text">cd HarnessLab</code>
-                  <button type="button" class="cmd-copy-btn" onclick="copyCommand(this, 'cd HarnessLab')">
-                    📋 Copy
-                  </button>
+                  <button type="button" class="cmd-copy-btn" onclick="copyCommand(this, 'cd HarnessLab')">📋 Copy</button>
                 </div>
                 <div class="os-cmd-group">
                   <div class="os-cmd-label">🪟 Windows (PowerShell / Command Prompt):</div>
@@ -380,8 +452,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 5: CH 01 -->
-    <section class="slide slide--alt" id="s5" data-slide="5" data-title="Ch 01 Lab: Control Plane vs Unsafe Swarm">
+    <!-- SLIDE 6: CH 01 -->
+    <section class="slide" id="s6" data-slide="6" data-title="Ch 01 Lab: Control Plane vs Unsafe Swarm">
       <div class="slide__in">
         <span class="kicker">Chapter 01 · Hands-On Lab</span>
         <h2 class="h2">Harness as the Control Plane for Long-Horizon Multi-Agent Systems</h2>
@@ -410,8 +482,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>control_evidence_matrix</code> (10-point mapping), <code>checkpoint</code> (SHA-256 evidence hash), <code>context_firewall.quarantined</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Look at <code>control_evidence_matrix</code> in result.json. Which decision proves that safety emerged from the harness boundaries rather than model prompt compliance?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">Open <code>chapters/ch01/scenario.py</code>. Add a tool call <code>query_vault</code> without an intent contract. Run the CLI and verify that <code>ToolGateway</code> blocks it, while the low-risk patch remains unaffected.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#ControlPlane</span>
@@ -424,8 +496,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 6: CH 02 -->
-    <section class="slide" id="s6" data-slide="6" data-title="Ch 02 Lab: Autonomy Ladder and Leases">
+    <!-- SLIDE 7: CH 02 -->
+    <section class="slide slide--alt" id="s7" data-slide="7" data-title="Ch 02 Lab: Autonomy Ladder and Leases">
       <div class="slide__in">
         <span class="kicker">Chapter 02 · Hands-On Lab</span>
         <h2 class="h2">Autonomy: Graduated Control and Human Oversight</h2>
@@ -454,8 +526,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>autonomy_ladder</code>, <code>lease_history</code> (renewal receipts), <code>rollback_log</code> (reversible state restoration), <code>capability_budgets</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Why are some security controls strictly non-waivable? What happens when a long-running agent resumes execution after its authority lease has expired?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">In <code>scenario.py</code>, set the tool budget to 2 and trigger 3 calls. Observe the exact <code>tool budget exhausted</code> denial. Verify that the rollback hook restores the previous clean state.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#AutonomyLadder</span>
@@ -468,8 +540,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 7: CH 03 -->
-    <section class="slide slide--alt" id="s7" data-slide="7" data-title="Ch 03 Lab: Identity and Delegation Chains">
+    <!-- SLIDE 8: CH 03 -->
+    <section class="slide" id="s8" data-slide="8" data-title="Ch 03 Lab: Identity and Delegation Chains">
       <div class="slide__in">
         <span class="kicker">Chapter 03 · Hands-On Lab</span>
         <h2 class="h2">Identity: Per-Agent Identity and Delegation Chains</h2>
@@ -498,8 +570,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>identities</code> (planner, reader, patcher, auditor), <code>audience_tokens</code>, <code>delegation_chains</code>, <code>revoked_subjects</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Why must an agent resume from pause be treated as a new authorization moment? Trace why the subagent was denied when attempting to access a different tool audience."</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">In <code>chapters/ch03/scenario.py</code>, forge a token with an mismatched audience string. Run the lab to inspect the <code>audience_binding</code> denial, and verify why resume is an authorization checkpoint.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#PerAgentIdentity</span>
@@ -512,8 +584,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 8: CH 04 -->
-    <section class="slide" id="s8" data-slide="8" data-title="Ch 04 Lab: Intent Contracts and Drift">
+    <!-- SLIDE 9: CH 04 -->
+    <section class="slide slide--alt" id="s9" data-slide="9" data-title="Ch 04 Lab: Intent Contracts and Drift">
       <div class="slide__in">
         <span class="kicker">Chapter 04 · Hands-On Lab</span>
         <h2 class="h2">Intent: Contracts, Drift Detection, and Authorization by Purpose</h2>
@@ -542,8 +614,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>contract_summary</code> (SHA-256 goal digest), <code>drift_events</code>, <code>rewritten_calls</code>, <code>purpose_authorizations</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Why is tool-name authorization insufficient to stop agent exploitation? How does transparent rewriting preserve productivity while preventing malicious side effects?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">Examine <code>rewritten_calls</code> in <code>result.json</code>. Modify the agent payload to include an unapproved recipient. Verify that transparent sanitization protects data while preserving task completion.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#IntentContract</span>
@@ -556,8 +628,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 9: CH 05 -->
-    <section class="slide slide--alt" id="s9" data-slide="9" data-title="Ch 05 Lab: Context Trust Tiers">
+    <!-- SLIDE 10: CH 05 -->
+    <section class="slide" id="s10" data-slide="10" data-title="Ch 05 Lab: Context Trust Tiers">
       <div class="slide__in">
         <span class="kicker">Chapter 05 · Hands-On Lab</span>
         <h2 class="h2">Context: Trust Tiers, Provenance, and Context-Poisoning Containment</h2>
@@ -586,8 +658,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>quarantine_ledger</code> (itemized injection heuristics), <code>released_context</code> vs <code>inspected_context</code>, <code>checkpoint</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"When facing the lethal trifecta (private data, tool capability, external sink), which leg must the harness sever first? How does quarantine preserve forensic evidence?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">Inject an item with the words <code>private</code>, <code>tool</code>, and <code>external</code> into context. Verify that the <code>ContextFirewall</code> triggers the lethal-trifecta quarantine rule.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#ContextFirewall</span>
@@ -600,8 +672,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 10: CH 06 -->
-    <section class="slide" id="s10" data-slide="10" data-title="Ch 06 Lab: Memory Firewall and Forgetting">
+    <!-- SLIDE 11: CH 06 -->
+    <section class="slide slide--alt" id="s11" data-slide="11" data-title="Ch 06 Lab: Memory Firewall and Forgetting">
       <div class="slide__in">
         <span class="kicker">Chapter 06 · Hands-On Lab</span>
         <h2 class="h2">Memory: State Firewall, Ledger, and Forgetting</h2>
@@ -630,8 +702,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>ledger_snapshot</code> (active, expired, and tombstoned records), <code>promoted_memories</code>, <code>write_gate_denials</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Why are explicit tombstones safer than silent hard deletes in multi-agent memory stores? How do tombstones prevent poisoned memory replay attacks?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">Attempt to write a memory entry containing <code>always approve</code>. Verify that <code>MemoryFirewall</code> detects future-behavior poisoning. Then test tombstone marking on rollback.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#MemoryFirewall</span>
@@ -644,8 +716,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 11: CH 07 -->
-    <section class="slide slide--alt" id="s11" data-slide="11" data-title="Ch 07 Lab: Observability and Hill-Climbing">
+    <!-- SLIDE 12: CH 07 -->
+    <section class="slide" id="s12" data-slide="12" data-title="Ch 07 Lab: Observability and Hill-Climbing">
       <div class="slide__in">
         <span class="kicker">Chapter 07 · Hands-On Lab</span>
         <h2 class="h2">Observability, Evals, and Hill-Climbing Evidence</h2>
@@ -674,8 +746,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>decision_trace</code>, <code>evidence_envelope</code> (artifact hash digests), <code>regression_findings</code>, <code>replay_bundle</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Why is raw execution speed insufficient justification to adopt a model prompt optimization? What makes an agent replay bundle cryptographically verifiable?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">Inspect <code>evidence_envelope</code> in <code>result.json</code>. Alter one character in a span attribute; run the verification script to prove that the tamper-evident SHA-256 signature breaks.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#EvidenceEnvelope</span>
@@ -688,8 +760,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 12: CH 08 -->
-    <section class="slide" id="s12" data-slide="12" data-title="Ch 08 Lab: Runtime Steering">
+    <!-- SLIDE 13: CH 08 -->
+    <section class="slide slide--alt" id="s13" data-slide="13" data-title="Ch 08 Lab: Runtime Steering">
       <div class="slide__in">
         <span class="kicker">Chapter 08 · Hands-On Lab</span>
         <h2 class="h2">Runtime Steering: Intervention, Policy Injection, and Safe Rollback</h2>
@@ -718,8 +790,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>steering_actions</code>, <code>policy_overlays</code> (temporary rule with TTL), <code>compensation_records</code>, <code>resumed_checkpoint</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"When an agent exhibits unsafe behavior, when do you pause versus kill? Why must policy overlays enforce an explicit TTL expiration rather than permanent edits?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">In <code>chapters/ch08/scenario.py</code>, adjust the overlay TTL to 0 seconds. Re-run and verify that the harness automatically drops the overlay, preventing permanent configuration drift.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#RuntimeSteering</span>
@@ -732,8 +804,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 13: CH 09 -->
-    <section class="slide slide--alt" id="s13" data-slide="13" data-title="Ch 09 Lab: Fleet Scalability">
+    <!-- SLIDE 14: CH 09 -->
+    <section class="slide" id="s14" data-slide="14" data-title="Ch 09 Lab: Fleet Scalability">
       <div class="slide__in">
         <span class="kicker">Chapter 09 · Hands-On Lab</span>
         <h2 class="h2">Scalability: Fleet Coordination Without Cascading Failure</h2>
@@ -762,8 +834,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>fleet_status</code>, <code>idempotency_ledger</code> (hash-indexed execution history), <code>rate_limit_metrics</code>, <code>capacity_epochs</code>.</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Is queue growth caused by slow model inference or downstream tool throttling? How does the idempotency ledger guarantee that retried operations never duplicate side effects?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">In <code>chapters/ch09/scenario.py</code>, submit two tasks sharing the same <code>idempotency_key</code>. Verify that the second item is dropped from the active queue without re-execution.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#FleetBulkheads</span>
@@ -776,8 +848,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 14: CH 10 -->
-    <section class="slide" id="s14" data-slide="14" data-title="Ch 10 Lab: Data Governance">
+    <!-- SLIDE 15: CH 10 -->
+    <section class="slide slide--alt" id="s15" data-slide="15" data-title="Ch 10 Lab: Data Governance">
       <div class="slide__in">
         <span class="kicker">Chapter 10 · Hands-On Lab</span>
         <h2 class="h2">Data Governance: Classification-Aware Tools, Egress, and Compliance</h2>
@@ -806,8 +878,8 @@
               <li>• <strong>Forensic Artifacts:</strong> <code>data_routes</code>, <code>residency_enforcements</code>, <code>dlp_rewrites</code>, <code>erasure_receipts</code> (proving dual-layer erasure).</li>
             </ul>
             <div class="discussion-box">
-              <div class="discussion-title">💬 Classroom Exercise &amp; Discussion:</div>
-              <div class="discussion-text">"Where do data classification labels typically get lost between prompt intake, tool calls, memory, and traces? How do you prove complete GDPR erasure to an auditor?"</div>
+              <div class="discussion-title">🧪 Hands-On Failure Injection Challenge:</div>
+              <div class="discussion-text">Attempt to send EU patient data to a destination with region <code>us</code>. Verify that <code>DataGovernanceEngine</code> rejects the call with <code>regulated must stay in eu</code>.</div>
             </div>
             <div class="chip-row">
               <span class="chip">#DataGovernance</span>
@@ -820,8 +892,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 15: CLOSE -->
-    <section class="slide slide--alt" id="s15" data-slide="15" data-title="Tutorial Class Summary &amp; Resources">
+    <!-- SLIDE 16: CLOSE & WORKSHOP GUIDE -->
+    <section class="slide" id="s16" data-slide="16" data-title="Tutorial Class Summary &amp; Workshop Guide">
       <div class="slide__in">
         <span class="kicker">Class Summary</span>
         <h2 class="h2">Run All Labs and Teach the Evidence</h2>
@@ -848,7 +920,6 @@
               <li>• <strong>Lab Repository:</strong> <a href="https://github.com/kenhuangus/HarnessLab" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">github.com/kenhuangus/HarnessLab ↗</a></li>
               <li>• <strong>Published Book:</strong> <a href="https://www.amazon.com/dp/B0HF3F86YM" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">Harness Engineering (Amazon Kindle) ↗</a></li>
               <li>• <strong>Author Site:</strong> <a href="https://distributedapps.ai/" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">distributedapps.ai ↗</a></li>
-              <li>• <strong>Coding Agent Environment Setup:</strong> <a href="https://kenhuangus.github.io/packt-harness/slides.html#1" target="_blank" rel="noopener" style="color:#BD5D3A; font-weight:700;">packt-harness slide 1 &amp; 6 ↗</a></li>
             </ul>
             <div class="chip-row">
               <span class="chip">#HarnessEngineering</span>
@@ -866,12 +937,12 @@
   <nav class="ctrl" aria-label="Slide Controls">
     <button type="button" class="ctrl__btn" id="prevBtn" aria-label="Previous Slide">‹ Prev</button>
     <div class="dots" id="dots" role="tablist"></div>
-    <span class="ctrl__count" id="count">1 / 15</span>
+    <span class="ctrl__count" id="count">1 / 16</span>
     <button type="button" class="ctrl__btn ctrl__btn--accent" id="nextBtn" aria-label="Next Slide">Next ›</button>
   </nav>
 
   <div class="progress" id="progress"></div>
 
-  <script src="assets/deck.js?v=20261026b"></script>
+  <script src="assets/deck.js?v=20261026c"></script>
 </body>
 </html>

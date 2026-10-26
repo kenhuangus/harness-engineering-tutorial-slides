@@ -7,7 +7,6 @@ Interactive GitHub Pages slide deck for a 10-chapter hands-on tutorial class bas
 - **Companion Lab Repository:** `https://github.com/kenhuangus/HarnessLab`
 - **Published Book:** `https://www.amazon.com/dp/B0HF3F86YM`
 - **Author Site:** `https://distributedapps.ai/`
-- **Coding-Agent Environment Setup Reference:** `https://kenhuangus.github.io/packt-harness/slides.html#1`
 
 ## Local Preview
 
