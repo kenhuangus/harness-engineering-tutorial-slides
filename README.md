@@ -1,12 +1,15 @@
 # Hands-On Harness Engineering Tutorial Slides
 
-Interactive GitHub Pages slide deck for a 10-chapter hands-on tutorial masterclass based on the book:
+> 🌐 **Live Course Slide Deck (GitHub Pages):**  
+> **[https://kenhuangus.github.io/harness-engineering-tutorial-slides/](https://kenhuangus.github.io/harness-engineering-tutorial-slides/)**
+
+Interactive 21-slide deck for a 10-chapter hands-on tutorial masterclass based on the book:
 **Harness Engineering: Design Patterns for Securing Long-Horizon Multi-Agent AI Systems** by Ken Huang, CISSP.
 
-- **Live Presentation Deck:** `https://kenhuangus.github.io/harness-engineering-tutorial-slides/`
-- **Companion Lab Repository:** `https://github.com/kenhuangus/HarnessLab`
-- **Published Book:** `https://www.amazon.com/dp/B0HF3F86YM`
-- **Author Site:** `https://distributedapps.ai/`
+- **Live Presentation Deck:** [https://kenhuangus.github.io/harness-engineering-tutorial-slides/](https://kenhuangus.github.io/harness-engineering-tutorial-slides/)
+- **Companion Lab Repository:** [https://github.com/kenhuangus/HarnessLab](https://github.com/kenhuangus/HarnessLab)
+- **Published Book:** [Harness Engineering (Amazon Kindle)](https://www.amazon.com/dp/B0HF3F86YM)
+- **Author Site:** [https://distributedapps.ai/](https://distributedapps.ai/)
 
 ---
 
